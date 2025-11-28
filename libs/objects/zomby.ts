@@ -93,6 +93,7 @@ export default class Zomby extends entity {
     }
     death(object: Game_object): void {
         if (this.dead) return;
+        this.dead = true;
         super.death(object);
         if (this.game instanceof Zomby_game) this.game.killed_zombies = this.game.killed_zombies + 1;
         var player = object instanceof Grenade_entity ? object.owner : object;
@@ -115,7 +116,6 @@ export default class Zomby extends entity {
                     }
                 });
         }
-        this.dead = true;
         this.cry_timer.restart();
         this.play_sound(
             `${this.sound_path}/death/`,
